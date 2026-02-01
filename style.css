@@ -24,7 +24,7 @@ body {
     font-size: 2.2em;
     font-weight: 600;
     letter-spacing: -0.5px;
-    color: #2e7d32;
+    color: black;
     margin-bottom: 8px;
 }
 
@@ -384,4 +384,74 @@ body {
 
 .popup-content button:hover {
     background: #43a047;
+}
+body {
+    padding-top: 80px;
+}
+
+
+/* NAVBAR STYLING */
+
+.custom-navbar {
+    background: linear-gradient(135deg, #B0D9B0, #72BB72);
+    padding: 15px 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.logo-section i {
+    font-size: 22px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.nav-links .active {
+    background: white;
+    color: #72BB72;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-links {
+        gap: 10px;
+    }
 }

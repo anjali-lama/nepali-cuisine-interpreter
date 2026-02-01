@@ -3,11 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="script.js"></script>
+
     <title>Nepali Cuisine Interpreter 🍜</title>
     
+    <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico.png">
+    <link rel="apple-touch-icon" href="assets/icons/favicon.ico.png">
+    
+    <!-- Custom CSS - MINT GREEN THEME -->
     <style>
         :root {
             --mint-green: #B0D9B0;
@@ -17,10 +29,18 @@
             --accent-teal: #20b2aa;
             --light-gray: #f8f9fa;
             --medium-gray: #e9ecef;
+            --dark-gray: #495057;
             --text-dark: #212529;
             --text-light: #6c757d;
             --white: #ffffff;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
@@ -28,46 +48,16 @@
             background-color: var(--light-gray);
             color: var(--text-dark);
             min-height: 100vh;
-            padding: 0;
+            padding: 20px;
             line-height: 1.6;
-        }
-        
-        .navbar {
-            background-color: var(--white) !important;
-            border-bottom: 3px solid var(--mint-green);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            padding: 12px 0;
-        }
-        
-        .navbar-brand {
-            color: var(--extra-dark-mint) !important;
-            font-weight: 700;
-            font-size: 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .nav-link {
-            color: var(--text-dark) !important;
-            font-weight: 500;
-            margin: 0 8px;
-            padding: 8px 16px !important;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-        
-        .nav-link:hover, .nav-link.active {
-            background-color: var(--mint-green);
-            color: var(--text-dark) !important;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
         }
         
+        /* Header - Clean and Simple */
         .main-header {
             text-align: center;
             padding: 40px 20px;
@@ -81,6 +71,14 @@
             color: var(--extra-dark-mint);
         }
         
+        .main-header .lead {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Search Section - Clean Card */
         .search-section {
             background: var(--white);
             border-radius: 12px;
@@ -90,13 +88,30 @@
             border: 1px solid var(--medium-gray);
         }
         
+        .search-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--dark-mint);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
         .search-input {
             width: 100%;
             padding: 14px 18px;
             font-size: 1rem;
             border: 1px solid var(--medium-gray);
             border-radius: 8px;
+            transition: all 0.3s;
             margin-bottom: 15px;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--mint-green);
+            box-shadow: 0 0 0 3px rgba(176, 217, 176, 0.2);
         }
         
         .search-btn {
@@ -108,15 +123,22 @@
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            width: 100%;
             transition: all 0.3s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
         .search-btn:hover {
             background-color: var(--dark-mint);
             color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 192, 139, 0.2);
         }
         
+        /* Quick Search Buttons */
         .quick-search-container {
             display: flex;
             flex-wrap: wrap;
@@ -134,13 +156,19 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
         }
         
         .quick-search-btn:hover {
             background: var(--light-mint);
             border-color: var(--mint-green);
+            color: var(--dark-mint);
         }
         
+        /* Loading Animation */
         .loading-container {
             display: none;
             text-align: center;
@@ -148,6 +176,7 @@
             background: var(--white);
             border-radius: 12px;
             margin: 20px 0;
+            border: 1px solid var(--medium-gray);
         }
         
         .spinner {
@@ -165,6 +194,7 @@
             100% { transform: rotate(360deg); }
         }
         
+        /* Results Card - Clean Design */
         .result-card {
             background: var(--white);
             border-radius: 12px;
@@ -187,17 +217,85 @@
             padding: 25px 30px;
         }
         
-        .result-header.not-found {
-            background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important;
-            color: #c62828 !important;
-        }
-        
         .food-title {
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 5px;
         }
         
+        .food-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .pronunciation-badge {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-dark);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .result-body {
+            padding: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 25px 0 15px;
+            color: var(--dark-mint);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title:first-child {
+            margin-top: 0;
+        }
+        
+        .description-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+            padding: 15px;
+            background: var(--light-mint);
+            border-radius: 8px;
+            border-left: 4px solid var(--mint-green);
+        }
+        
+        /* Did You Know Button */
+        .did-you-know-btn {
+            background: var(--light-mint);
+            color: var(--dark-mint);
+            border: 2px solid var(--mint-green);
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 25px auto;
+            width: fit-content;
+        }
+        
+        .did-you-know-btn:hover {
+            background: var(--mint-green);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(176, 217, 176, 0.3);
+        }
+        
+        /* Model Cards - Clean Grid */
         .model-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -214,93 +312,51 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
         
-        .model-card.not-found {
-            border-top: 4px solid #dc3545;
-            background: #fff5f5;
+        .model-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+            border-color: var(--mint-green);
         }
         
-        .model-card.rule-based { border-top: 4px solid #ff9a9a; }
-        .model-card.tfidf { border-top: 4px solid var(--accent-teal); }
-        .model-card.ensemble { border-top: 4px solid #ffc869; }
+        .model-card.rule-based {
+            border-top: 4px solid #ff9a9a;
+        }
         
-        /* DYNAMIC ACCURACY BADGE - ONLY ONE DISPLAY */
+        .model-card.tfidf {
+            border-top: 4px solid var(--accent-teal);
+        }
+        
+        .model-card.ensemble {
+            border-top: 4px solid #ffc869;
+        }
+        
+        .model-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        
         .accuracy-badge {
             display: inline-block;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            transition: all 0.3s;
-        }
-        
-        .accuracy-high { 
-            background: #d4edda; 
-            color: #155724;
-            border: 2px solid #28a745;
-        }
-        
-        .accuracy-medium { 
-            background: #fff3cd; 
-            color: #856404;
-            border: 2px solid #ffc107;
-        }
-        
-        .accuracy-low { 
-            background: #f8d7da; 
-            color: #721c24;
-            border: 2px solid #dc3545;
-        }
-        
-        .accuracy-zero { 
-            background: #e9ecef; 
-            color: #6c757d;
-            border: 2px solid #6c757d;
-        }
-        
-        .match-result {
-            font-size: 1.1rem;
+            padding: 4px 10px;
+            border-radius: 12px;
             font-weight: 600;
-            color: var(--text-dark);
-            margin: 10px 0;
-            padding: 10px;
-            background: var(--light-gray);
-            border-radius: 6px;
-            border-left: 4px solid var(--medium-gray);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
         }
         
-        .match-result.found {
-            background: var(--light-mint);
-            border-left-color: var(--dark-mint);
-            color: var(--extra-dark-mint);
+        .accuracy-80 { 
+            background: #ffeaea; 
+            color: #e57373;
         }
         
-        .match-result.not-found {
-            background: #f8d7da;
-            border-left-color: #dc3545;
-            color: #721c24;
+        .accuracy-90 { 
+            background: #e8f8f7; 
+            color: var(--accent-teal);
         }
         
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin: 25px 0 15px;
-            color: var(--dark-mint);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .description-text {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: var(--text-dark);
-            padding: 15px;
-            background: var(--light-mint);
-            border-radius: 8px;
-            border-left: 4px solid var(--mint-green);
-        }
-        
+        /* Quick Info Cards */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -314,6 +370,37 @@
             border-radius: 8px;
             padding: 15px;
             text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .info-card:hover {
+            border-color: var(--mint-green);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .info-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark-mint);
+        }
+        
+        .info-card h5 {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .info-card p {
+            font-size: 1rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        
+        /* Food Image */
+        .food-image-container {
+            text-align: center;
+            margin: 25px 0;
         }
         
         .food-image {
@@ -322,20 +409,10 @@
             border-radius: 10px;
             box-shadow: var(--shadow);
             object-fit: cover;
+            border: 1px solid var(--medium-gray);
         }
         
-        .not-found-banner {
-            background: #fff3cd;
-            border: 2px solid #ffc107;
-            color: #856404;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        
+        /* Features Section */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -350,179 +427,491 @@
             text-align: center;
             box-shadow: var(--shadow);
             border: 1px solid var(--medium-gray);
+            transition: all 0.3s;
         }
         
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--mint-green);
+        }
+        
+        .feature-icon {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--dark-mint);
+        }
+        
+        .feature-card h4 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            border: none;
+        }
+        
+        .nav-btn-primary {
+            background-color: var(--mint-green);
+            color: var(--text-dark);
+        }
+        
+        .nav-btn-secondary {
+            background-color: var(--white);
+            color: var(--text-dark);
+            border: 1px solid var(--medium-gray);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .nav-btn-primary:hover {
+            background-color: var(--dark-mint);
+            color: white;
+        }
+        
+        .nav-btn-secondary:hover {
+            background-color: var(--light-mint);
+            border-color: var(--mint-green);
+            color: var(--dark-mint);
+        }
+        
+        /* Footer */
         .footer {
             text-align: center;
             padding: 30px 0;
             margin-top: 50px;
             color: var(--text-light);
+            font-size: 0.9rem;
             border-top: 1px solid var(--medium-gray);
         }
         
+        .footer p:first-child {
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        /* Popup Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(3px);
+        }
+        
+        .modal-content {
+            background: var(--white);
+            border-radius: 12px;
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            position: relative;
+            animation: modalAppear 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--medium-gray);
+        }
+        
+        @keyframes modalAppear {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .modal-icon {
+            font-size: 3rem;
+            color: var(--dark-mint);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .modal-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 15px;
+            background: var(--light-mint);
+            border-radius: 8px;
+            border-left: 4px solid var(--mint-green);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: var(--light-gray);
+            color: var(--text-dark);
+        }
+        
+        /* Responsive Design */
         @media (max-width: 768px) {
             .main-header h1 { font-size: 2.2rem; }
+            .main-header { padding: 30px 15px; }
+            .search-section { padding: 20px; }
             .model-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+            .nav-buttons { flex-direction: column; }
+            .food-title { font-size: 1.6rem; }
         }
-    </style>
+        /* NAVBAR STYLING FOR INDEX PAGE */
+
+.custom-navbar {
+    background: linear-gradient(135deg, #B0D9B0, #72BB72);
+    padding: 15px 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.nav-links .active {
+    background: white;
+    color: #72BB72;
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-links {
+        gap: 10px;
+    }
+}
+</style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-utensils"></i>
-                Nepali Cuisine Interpreter
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-home me-1"></i> Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="evaluation.html"><i class="fas fa-chart-bar me-1"></i> Evaluation</a></li>
-                    <li class="nav-item"><a class="nav-link" href="models.html"><i class="fas fa-brain me-1"></i> Models</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i> About</a></li>
-                </ul>
-            </div>
+    <nav class="custom-navbar">
+    <div class="nav-container">
+
+        <div class="logo-section">
+            <i class="fas fa-utensils"></i>
+            <span class="brand-name">Nepali Cuisine Interpreter</span>
         </div>
-    </nav>
+
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="evaluation.html">Evaluation</a>
+            <a href="about.html">About</a>
+        </div>
+
+    </div>
+</nav>
 
     <div class="container">
-        <header class="main-header">
+        <!-- Header - Clean and Simple -->
+        <header class="main-header animate__animated animate__fadeInDown">
             <h1>Nepali Cuisine Interpreter</h1>
-            <p class="lead">AI-powered translation with real-time accuracy calculation</p>
+            <p class="lead">AI-powered translation with cultural insights, pronunciation, and dietary information</p>
         </header>
 
-        <div class="search-section">
-            <div class="section-title">
-                <i class="fas fa-search"></i> Discover Nepali Cuisine
+        <!-- Search Section - Clean Card -->
+        <div class="search-section animate__animated animate__fadeInUp">
+            <div class="search-title">
+                <i class="fas fa-search"></i>
+                Discover Nepali Cuisine
             </div>
             
-            <input type="text" class="search-input" id="searchInput" 
-                   placeholder="Try: Momo, Pizza, Sushi, Dal Bhat..." autocomplete="off">
+            <input type="text" 
+                   class="search-input" 
+                   id="searchInput" 
+                   placeholder="Enter food name (e.g., Momo, Dal Bhat, Sel Roti, Thukpa)..."
+                   autocomplete="off">
             
             <button class="search-btn" onclick="searchFood()">
                 <i class="fas fa-language"></i> Translate & Explore
             </button>
             
             <div class="quick-search-container">
-                <button class="quick-search-btn" onclick="quickSearch('Momo')">🥟 Momo</button>
-                <button class="quick-search-btn" onclick="quickSearch('Dal Bhat')">🍚 Dal Bhat</button>
-                <button class="quick-search-btn" onclick="quickSearch('Sel Roti')">🍩 Sel Roti</button>
-                <button class="quick-search-btn" onclick="quickSearch('Pizza')">🍕 Test Non-Nepali</button>
+                <button class="quick-search-btn" onclick="quickSearch('Momo')">
+                    <i class="fas fa-dumpling"></i> Momo
+                </button>
+                <button class="quick-search-btn" onclick="quickSearch('Dal Bhat')">
+                    <i class="fas fa-bowl-food"></i> Dal Bhat
+                </button>
+                <button class="quick-search-btn" onclick="quickSearch('Sel Roti')">
+                    <i class="fas fa-donut"></i> Sel Roti
+                </button>
+                <button class="quick-search-btn" onclick="quickSearch('Thukpa')">
+                    <i class="fas fa-bowl-rice"></i> Thukpa
+                </button>
+                <button class="quick-search-btn" onclick="quickSearch('Choila')">
+                    <i class="fas fa-pepper-hot"></i> Choila
+                </button>
             </div>
         </div>
 
+        <!-- Loading Animation -->
         <div class="loading-container" id="loading">
             <div class="spinner"></div>
-            <h4>Analyzing with AI Models</h4>
-            <p>Calculating accuracy scores...</p>
+            <h4 style="color: var(--text-dark); margin-bottom: 8px;">Analyzing with AI Models</h4>
+            <p style="color: var(--text-light);">Rule-Based • TF-IDF • Ensemble models at work</p>
         </div>
 
+        <!-- Results Card - Clean Design -->
         <div class="result-card" id="resultContainer">
-            <div class="result-header" id="resultHeader">
-                <h2 class="food-title" id="foodName">-</h2>
-                <p class="food-subtitle" id="nepaliName">-</p>
+            <div class="result-header">
+                <h2 class="food-title" id="foodName">Momo</h2>
+                <p class="food-subtitle" id="nepaliName">म:म:</p>
+                <div class="pronunciation-badge">
+                    <i class="fas fa-volume-up"></i>
+                    <span id="phoneticText">MOH-moh</span>
+                </div>
             </div>
             
-            <div class="result-body" style="padding: 30px;">
-                <div class="not-found-banner" id="notFoundBanner" style="display: none;">
-                    <i class="fas fa-exclamation-triangle"></i> 
-                    <strong>Not Found:</strong> This dish is not in our Nepali cuisine database
+            <div class="result-body">
+                <!-- Description -->
+                <h4 class="section-title">
+                    <i class="fas fa-utensils"></i> Description
+                </h4>
+                <p class="description-text" id="descriptionText">
+                    Juicy steamed dumplings stuffed with spiced meat or veggies, served with fiery chutney
+                </p>
+                
+                <!-- Did You Know Button -->
+                <div style="text-align: center;">
+                    <button class="did-you-know-btn" onclick="showDidYouKnow()">
+                        <i class="fas fa-lightbulb"></i> Did You Know?
+                    </button>
                 </div>
-
-                <h4 class="section-title"><i class="fas fa-utensils"></i> Description</h4>
-                <p class="description-text" id="descriptionText">-</p>
                 
-                <h4 class="section-title"><i class="fas fa-brain"></i> AI Model Analysis</h4>
-                
+                <!-- AI Model Analysis -->
+                <h4 class="section-title">
+                    <i class="fas fa-brain"></i> AI Model Analysis
+                </h4>
                 <div class="model-grid">
-                    <!-- Rule-Based Model - ONLY ACCURACY BADGE, NO DUPLICATE CONFIDENCE -->
-                    <div class="model-card rule-based" id="ruleCard">
-                        <div class="model-name"><i class="fas fa-code"></i> Rule-Based Model</div>
-                        <div class="accuracy-badge accuracy-zero" id="ruleAccuracyBadge">0% Accuracy</div>
-                        <div class="match-result not-found" id="ruleResult">
-                            Result: <span>Waiting for input...</span>
-                        </div>
+                    <!-- Rule-Based Model -->
+                    <div class="model-card rule-based">
+                        <div class="model-name">Rule-Based Model</div>
+                        <div class="accuracy-badge accuracy-80">80% Accuracy</div>
+                        <p><strong>Result:</strong> <span id="ruleResult" style="color: var(--text-dark);">Momo</span></p>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">Confidence: <span id="ruleConfidence" style="color: #e57373; font-weight: 600;">100%</span></p>
                     </div>
                     
-                    <!-- TF-IDF Model - ONLY ACCURACY BADGE, NO DUPLICATE CONFIDENCE -->
-                    <div class="model-card tfidf" id="tfidfCard">
-                        <div class="model-name"><i class="fas fa-vector-square"></i> TF-IDF Model</div>
-                        <div class="accuracy-badge accuracy-zero" id="tfidfAccuracyBadge">0% Accuracy</div>
-                        <div class="match-result not-found" id="tfidfResult">
-                            Result: <span>Waiting for input...</span>
-                        </div>
+                    <!-- TF-IDF Model -->
+                    <div class="model-card tfidf">
+                        <div class="model-name">TF-IDF Model</div>
+                        <div class="accuracy-badge accuracy-90">90% Accuracy</div>
+                        <p><strong>Result:</strong> <span id="tfidfResult" style="color: var(--text-dark);">Momo</span></p>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">Confidence: <span id="tfidfConfidence" style="color: var(--accent-teal); font-weight: 600;">95%</span></p>
                     </div>
                     
-                    <!-- Ensemble Model - ONLY ACCURACY BADGE, NO DUPLICATE CONFIDENCE -->
-                    <div class="model-card ensemble" id="ensembleCard">
-                        <div class="model-name"><i class="fas fa-layer-group"></i> Ensemble Model</div>
-                        <div class="accuracy-badge accuracy-zero" id="ensembleAccuracyBadge">0% Accuracy</div>
-                        <div class="match-result not-found" id="ensembleResult">
-                            Result: <span>Waiting for input...</span>
-                        </div>
+                    <!-- Ensemble Model -->
+                    <div class="model-card ensemble">
+                        <div class="model-name">Ensemble Model</div>
+                        <div class="accuracy-badge accuracy-90">90% Accuracy</div>
+                        <p><strong>Final Result:</strong> <span id="ensembleResult" style="color: var(--text-dark);">Momo</span></p>
+                        <p style="color: var(--text-light); font-size: 0.9rem;">Confidence: <span id="ensembleConfidence" style="color: var(--accent-teal); font-weight: 600;">98%</span></p>
                     </div>
                 </div>
                 
-                <h4 class="section-title"><i class="fas fa-info-circle"></i> Quick Info</h4>
+                <!-- Quick Info -->
+                <h4 class="section-title">
+                    <i class="fas fa-info-circle"></i> Quick Info
+                </h4>
                 <div class="info-grid">
                     <div class="info-card">
-                        <div style="font-size: 1.5rem; margin-bottom: 10px; color: var(--dark-mint);"><i class="fas fa-tag"></i></div>
+                        <div class="info-icon">
+                            <i class="fas fa-tag"></i>
+                        </div>
                         <h5>Category</h5>
-                        <p id="categoryText">-</p>
+                        <p id="categoryText">Appetizer</p>
                     </div>
+                    
                     <div class="info-card">
-                        <div style="font-size: 1.5rem; margin-bottom: 10px; color: var(--dark-mint);"><i class="fas fa-leaf"></i></div>
+                        <div class="info-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
                         <h5>Vegetarian</h5>
-                        <p id="vegetarianText">-</p>
+                        <p id="vegetarianText">❌ No</p>
                     </div>
+                    
                     <div class="info-card">
-                        <div style="font-size: 1.5rem; margin-bottom: 10px; color: var(--dark-mint);"><i class="fas fa-pepper-hot"></i></div>
+                        <div class="info-icon">
+                            <i class="fas fa-pepper-hot"></i>
+                        </div>
                         <h5>Spice Level</h5>
-                        <p id="spiceText">-</p>
+                        <p id="spiceText">🌶️🌶️🌶️ High</p>
                     </div>
+                    
                     <div class="info-card">
-                        <div style="font-size: 1.5rem; margin-bottom: 10px; color: var(--dark-mint);"><i class="fas fa-clock"></i></div>
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
                         <h5>Prep Time</h5>
-                        <p id="prepTime">-</p>
+                        <p id="prepTime">30-45 mins</p>
                     </div>
                 </div>
                 
-                <h4 class="section-title"><i class="fas fa-image"></i> Visual</h4>
-                <div style="text-align: center; margin: 25px 0;">
-                    <img src="" id="foodImage" alt="Food" class="food-image" 
-                         onerror="this.src='https://via.placeholder.com/400x300/f0f0f0/999?text=No+Image+Available'">
+                <!-- Food Image -->
+                <h4 class="section-title">
+                    <i class="fas fa-image"></i> Visual
+                </h4>
+                <div class="food-image-container">
+                    <img src="assets/images/momo.jpg" 
+                         id="foodImage"
+                         alt="Food Image"
+                         class="food-image"
+                         onerror="this.src='https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&h=600&fit=crop'">
                 </div>
             </div>
         </div>
 
+        <!-- Features -->
         <div class="features-grid">
             <div class="feature-card">
-                <div style="font-size: 2.5rem; color: var(--dark-mint); margin-bottom: 15px;"><i class="fas fa-chart-line"></i></div>
-                <h4>Dynamic Accuracy</h4>
-                <p>Real-time calculation for every query</p>
+                <div class="feature-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <h4>Multi-Script Support</h4>
+                <p>Handles Romanized and Devanagari script seamlessly</p>
             </div>
+            
             <div class="feature-card">
-                <div style="font-size: 2.5rem; color: var(--dark-mint); margin-bottom: 15px;"><i class="fas fa-shield-alt"></i></div>
-                <h4>Non-Nepali Detection</h4>
-                <p>Instantly identifies foreign dishes with 0% accuracy</p>
-            </div>
-            <div class="feature-card">
-                <div style="font-size: 2.5rem; color: var(--dark-mint); margin-bottom: 15px;"><i class="fas fa-brain"></i></div>
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
                 <h4>3 AI Models</h4>
-                <p>Ensemble approach for best results</p>
+                <p>Rule-Based, TF-IDF, and Ensemble models for accurate interpretation</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h4>Cultural Insights</h4>
+                <p>Learn traditions, festivals, and regional origins</p>
             </div>
         </div>
 
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <a href="evaluation.html" class="nav-btn nav-btn-primary">
+                <i class="fas fa-chart-bar"></i> View Model Evaluation
+            </a>
+        
+        </div>
+
+        <!-- Footer -->
         <footer class="footer">
             <p>Nepali Cuisine Interpreter • Made with ❤️ and 🍜</p>
             <p>Experience the taste of Nepal through AI-powered insights</p>
         </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <!-- Did You Know Modal -->
+    <div class="modal-overlay" id="didYouKnowModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-icon">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <h3 class="modal-title">Did You Know? ✨</h3>
+            <p class="modal-text" id="modalFactText">
+                Momo carts in Kathmandu stay open till 2 am on weekends!
+            </p>
+            <div style="text-align: center;">
+                <button class="quick-search-btn" onclick="closeModal()" style="margin: 0 auto; padding: 10px 25px;">
+                    <i class="fas fa-check"></i> Got it!
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

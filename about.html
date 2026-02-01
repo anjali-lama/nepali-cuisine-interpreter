@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Nepali Cuisine Interpreter</title>
+
+    <!-- Bootstrap & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --mint-green: #B0D9B0;
+            --light-mint: #E8F5E8;
+            --dark-mint: #8BC08B;
+            --extra-dark-mint: #72BB72;
+            --accent-teal: #20b2aa;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #495057;
+            --text-dark: #212529;
+            --text-light: #6c757d;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            border-radius: 10px;
+            padding: 10px 20px;
+            margin-bottom: 30px;
+        }
+        .navbar a {
+            color: var(--dark-mint);
+            font-weight: 600;
+            margin-right: 20px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .navbar a:hover {
+            color: var(--accent-teal);
+        }
+        .navbar .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--extra-dark-mint);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--extra-dark-mint);
+        }
+        .hero p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 10px auto 0;
+        }
+
+        /* Sections */
+        .section {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--medium-gray);
+        }
+        .section h2 {
+            color: var(--dark-mint);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section ul, .section ol {
+            padding-left: 20px;
+            color: var(--text-dark);
+        }
+        .section ul li, .section ol li {
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            color: var(--text-light);
+            border-top: 1px solid var(--medium-gray);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="navbar d-flex align-items-center justify-content-between">
+            <div class="logo">Nepali Cuisine Interpreter</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="evaluation.html">Evaluation</a>
+                <a href="about.html">About</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Discover the Flavors of Nepal</h1>
+            <p>
+                Explore the rich culinary heritage of Nepal with our interactive tool.
+                Learn about dishes, cultural insights, and pronunciation all in one place.
+            </p>
+        </div>
+
+        <!-- Introduction -->
+        <div class="section">
+            <h2><i class="fas fa-info-circle"></i> About the Project</h2>
+            <p>
+                The <strong>Nepali Cuisine Interpreter</strong> is a smart digital platform designed to make the diverse cuisine of Nepal accessible to everyone.
+                Whether you want to learn about traditional dishes, understand their cultural significance, or master their pronunciation,
+                our tool offers an interactive and educational experience.
+            </p>
+        </div>
+
+        <!-- Features -->
+        <div class="section">
+            <h2><i class="fas fa-star"></i> Key Features</h2>
+            <ul>
+                <li><strong>Interactive Search:</strong> Enter any Nepali dish (Romanized or Devanagari) for instant results.</li>
+                <li><strong>Multi-Model Accuracy:</strong> Uses Rule-Based, TF-IDF, and Ensemble Models to give reliable results, even with fuzzy spelling.</li>
+                <li><strong>Cultural Insights:</strong> Learn interesting facts and dietary information about each dish.</li>
+                <li><strong>Pronunciation Guide:</strong> Phonetic breakdowns for authentic pronunciation.</li>
+                <li><strong>Visual Representation:</strong> Dish images for better understanding and exploration.</li>
+            </ul>
+        </div>
+
+        <!-- Why We Built It -->
+        <div class="section">
+            <h2><i class="fas fa-heart"></i> Why We Built This</h2>
+            <p>
+                Nepal's cuisine is incredibly diverse, but many dishes are unknown outside the country and even within regions.
+                This tool was built to help learners, tourists, and food enthusiasts explore authentic Nepali dishes confidently,
+                combining modern AI technology with traditional culinary knowledge.
+            </p>
+        </div>
+
+        <!-- Our Approach -->
+        <div class="section">
+            <h2><i class="fas fa-cogs"></i> Our Approach</h2>
+            <ul>
+                <li><strong>Rule-Based Model:</strong> Exact matches using predefined rules.</li>
+                <li><strong>TF-IDF Model:</strong> Fuzzy matching with semantic understanding of dish names.</li>
+                <li><strong>Ensemble Model:</strong> Combines strengths of both models for the most accurate results.</li>
+            </ul>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="section">
+            <h2><i class="fas fa-utensils"></i> Start Exploring!</h2>
+            <p>
+                Dive in, search for your favorite Nepali dishes, and discover the stories, culture, and flavors behind every bite! 
+                <strong>Tip:</strong> If a dish isn’t recognized, double-check the spelling or try searching only authentic Nepali dishes.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Nepali Cuisine Interpreter • About Page</p>
+            <p style="font-size: 0.9rem;">Empowering everyone to explore, learn, and enjoy the rich culinary heritage of Nepal.</p>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
